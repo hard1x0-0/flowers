@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Growing Rose</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;400&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #120507; /* Deep, dark background */
+            font-family: 'Quicksand', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Dancing Script', cursive;
+            font-size: 15vw;
+            color: #4c0519;
+            opacity: 0.3;
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #garden {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .flower-wrapper {
+            position: absolute;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: bottom center;
+        }
+
+        .stem {
+            width: 3px;
+            background: linear-gradient(to top, #132102, #365314);
+            transform-origin: bottom;
+            animation: growStem 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            position: relative;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 25px;
+            height: 15px;
+            background: #2d4a08;
+            border-radius: 100% 0 100% 0;
+            opacity: 0;
+            transform: scale(0);
+            animation: growLeaf 0.6s ease-out forwards;
+        }
+
+        .flower-head {
+            position: absolute;
+            top: -55px;
+            opacity: 0;
+            transform-origin: center center;
+            animation: swirlBloom 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes growStem {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        @keyframes growLeaf {
+            to { opacity: 1; transform: scale(1) rotate(var(--rot)); }
+        }
+
+        @keyframes swirlBloom {
+            0% { opacity: 0; transform: scale(0) rotate(-90deg); }
+            50% { opacity: 1; transform: scale(0.6) rotate(45deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .footer {
+            z-index: 10;
+            margin-bottom: 4rem;
+            text-align: center;
+            pointer-events: none;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            padding: 1.5rem 3.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #fb7185;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(251, 113, 133, 0.3);
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            color: #9f1239;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 0.5rem;
+        }
+
+        svg {
+            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.6));
+        }
+    </style>
+</head>
+<body>
+
+    <div class="watermark">My Rose</div>
+    <div id="garden"></div>
+
+    <div class="footer">
+        <h1>Happy Rose Day</h1>
+        <p class="hint">Watch the garden grow</p>
+    </div>
+
+    <script>
+        const garden = document.getElementById('garden');
+        const svgNS = "http://www.w3.org/2000/svg";
+
+        const roseColors = [
+            ['#7f1d1d', '#ef4444', '#450a0a'], // Deep Blood Red
+            ['#881337', '#fb7185', '#2d0208'], // Velvet Rose
+            ['#4c0519', '#be185d', '#000000']  // Blackened Rose
+        ];
+
+        function drawSwirlingRose(svg, colorPair) {
+            const [base, light, dark] = colorPair;
+            
+            // Sepals
+            for(let i=0; i<5; i++) {
+                const sepal = document.createElementNS(svgNS, "path");
+                sepal.setAttribute("d", "M50 50 Q60 85 50 100 Q40 85 50 50");
+                sepal.setAttribute("fill", "#1a2e05");
+                sepal.setAttribute("transform", `rotate(${i*72 + 15}, 50, 50)`);
+                svg.appendChild(sepal);
+            }
+
+            // More organic, rounded petal shapes to avoid "boxy" look
+            const outerPath = "M50 50 C70 15 105 40 95 75 C85 100 15 100 5 75 C-5 40 30 15 50 50";
+            const midPath = "M50 50 C65 25 85 45 78 68 C70 85 30 85 22 68 C15 45 35 25 50 50";
+
+            // Outer Petals
+            for(let i=0; i<6; i++) {
+                const p = document.createElementNS(svgNS, "path");
+                p.setAttribute("d", outerPath);
+                p.setAttribute("fill", base);
+                p.setAttribute("stroke", dark);
+                p.setAttribute("stroke-width", "0.4");
+                p.setAttribute("transform", `rotate(${i*60}, 50, 50) scale(1.05)`);
+                svg.appendChild(p);
+            }
+
+            // Middle Petals
+            for(let i=0; i<5; i++) {
+                const p = document.createElementNS(svgNS, "path");
+                p.setAttribute("d", midPath);
+                p.setAttribute("fill", light);
+                p.setAttribute("stroke", dark);
+                p.setAttribute("stroke-width", "0.2");
+                p.setAttribute("transform", `rotate(${i*72 + 36}, 50, 50)`);
+                svg.appendChild(p);
+            }
+
+            // Core - Swirling Gradient/Path
+            const core = document.createElementNS(svgNS, "path");
+            core.setAttribute("d", "M50 50 m-10 0 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0 M50 50 m-6 0 a6 6 0 1 1 12 0 a6 6 0 1 1 -12 0");
+            core.setAttribute("fill", dark);
+            svg.appendChild(core);
+
+            const innerBud = document.createElementNS(svgNS, "path");
+            innerBud.setAttribute("d", "M50 42 C55 42 58 45 58 50 C58 55 50 62 50 62 C50 62 42 55 42 50 C42 45 45 42 50 42");
+            innerBud.setAttribute("fill", base);
+            svg.appendChild(innerBud);
+        }
+
+        function createGrowingFlower(x, y) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'flower-wrapper';
+            const stemHeight = window.innerHeight - y;
+            wrapper.style.left = (x - 2) + 'px';
+            wrapper.style.bottom = '0px';
+            wrapper.style.height = stemHeight + 'px';
+
+            const stem = document.createElement('div');
+            stem.className = 'stem';
+            stem.style.height = '100%';
+            
+            // Sequential leaf growth
+            for(let i=0; i<2; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.style.bottom = (30 + i*35) + '%';
+                const isLeft = i % 2 === 0;
+                leaf.style.left = isLeft ? '4px' : 'auto';
+                leaf.style.right = isLeft ? 'auto' : '4px';
+                leaf.style.setProperty('--rot', isLeft ? '-25deg' : '115deg');
+                if(!isLeft) leaf.style.transform += ' scaleX(-1)';
+                leaf.style.animationDelay = (0.6 + i*0.4) + 's';
+                stem.appendChild(leaf);
+            }
+
+            const head = document.createElement('div');
+            head.className = 'flower-head';
+            
+            const size = 140 + Math.random() * 20;
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("width", size);
+            svg.setAttribute("height", size);
+            svg.setAttribute("viewBox", "0 0 100 100");
+            
+            drawSwirlingRose(svg, roseColors[Math.floor(Math.random() * roseColors.length)]);
+
+            head.appendChild(svg);
+            wrapper.appendChild(stem);
+            wrapper.appendChild(head);
+            garden.appendChild(wrapper);
+
+            if (garden.children.length > 15) {
+                const first = garden.firstChild;
+                first.style.transition = 'opacity 1s, transform 1s';
+                first.style.opacity = '0';
+                first.style.transform = 'translateY(20px)';
+                setTimeout(() => first.remove(), 1000);
+            }
+        }
+
+        window.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.footer')) return;
+            createGrowingFlower(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.target.closest('.footer')) return;
+            const touch = e.touches[0];
+            createGrowingFlower(touch.clientX, touch.clientY);
+        });
+
+        window.onload = () => {
+            setTimeout(() => createGrowingFlower(window.innerWidth / 2, window.innerHeight * 0.55), 500);
+        };
+    </script>
+</body>
+</html>
