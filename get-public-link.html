@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Get Your Public Link - Rose Day</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%);
+            font-family: 'Quicksand', Arial, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+        }
+        h1 { color: #ff2d75; margin-bottom: 10px; font-size: 28px; }
+        .subtitle { color: rgba(255, 255, 255, 0.6); margin-bottom: 30px; }
+        .option {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .option h2 {
+            color: #ffb3d9;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .option p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .button {
+            display: inline-block;
+            background: #ff2d75;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background: #e01a5f;
+            transform: scale(1.05);
+        }
+        .code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            color: #ffb3d9;
+            font-size: 12px;
+        }
+        .easy { border-left: 4px solid #ff2d75; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌹 Rose Day - Getting Public Link</h1>
+        <p class="subtitle">Choose the easiest option for you</p>
+
+        <!-- Option 1: NGrok -->
+        <div class="option easy">
+            <h2>⚡ Option 1: ngrok (Fastest - 1 minute)</h2>
+            <p>Sign up for free account (takes 30 seconds):</p>
+            <a href="https://dashboard.ngrok.com/signup" class="button">Sign Up for ngrok</a>
+            <p style="margin-top: 15px;">After signup, copy your authtoken and run:</p>
+            <div class="code">D:/codeground/C++/.venv/Scripts/python.exe public_link.py</div>
+            <p>You'll instantly get a public URL to share!</p>
+        </div>
+
+        <!-- Option 2: Netlify -->
+        <div class="option">
+            <h2>📦 Option 2: Netlify (Easiest - 2 minutes)</h2>
+            <p>No coding needed. Just drag and drop your files.</p>
+            <a href="https://app.netlify.com/drop" class="button">Go to Netlify Drop</a>
+            <p style="margin-top: 15px;">Steps:</p>
+            <p>1. Click link above<br>
+            2. Drag flowers2.html into the box<br>
+            3. Get your public URL instantly</p>
+        </div>
+
+        <!-- Option 3: Vercel -->
+        <div class="option">
+            <h2>🚀 Option 3: Vercel (Premium - 2 minutes)</h2>
+            <p>Free hosting platform with custom domains.</p>
+            <a href="https://vercel.com/new" class="button">Deploy on Vercel</a>
+        </div>
+
+        <!-- Option 4: Firebase -->
+        <div class="option">
+            <h2>🔥 Option 4: Firebase Hosting (Free - 3 minutes)</h2>
+            <p>Google's hosting platform with excellent speed.</p>
+            <a href="https://firebase.google.com/docs/hosting/quickstart" class="button">Firebase Guide</a>
+        </div>
+
+        <div style="background: rgba(255, 45, 117, 0.1); border: 1px solid rgba(255, 45, 117, 0.3); border-radius: 10px; padding: 15px; margin-top: 30px;">
+            <p style="color: #ff2d75; font-weight: bold;">💡 Recommendation:</p>
+            <p style="margin-top: 8px; font-size: 14px;">Use <strong>Netlify</strong> if you want zero technical setup, or <strong>ngrok</strong> if you want instant hosting of your local server.</p>
+        </div>
+    </div>
+</body>
+</html>

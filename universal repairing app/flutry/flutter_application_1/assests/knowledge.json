@@ -1,0 +1,36 @@
+{
+  "bicycle_repair_guides": {
+    "chain": {
+      "title": "Chain Maintenance",
+      "difficulty": "Easy",
+      "steps": [
+        "Apply degreaser to a clean rag.",
+        "Hold the rag over the chain and pedal backward.",
+        "Apply a drop of lube to each link.",
+        "Wipe off excess lube with a dry cloth."
+      ],
+      "tools_needed": ["Degreaser", "Lube", "Rag"]
+    },
+    "pedal": {
+      "title": "Removing/Replacing Pedals",
+      "difficulty": "Medium",
+      "steps": [
+        "Identify the right and left pedals (Left is reverse-threaded!).",
+        "Use a 15mm wrench.",
+        "Turn toward the back of the bike to loosen.",
+        "Grease the threads before installing new ones."
+      ],
+      "tools_needed": ["15mm Wrench", "Grease"]
+    },
+    "derailleur": {
+      "title": "Adjusting the Rear Derailleur",
+      "difficulty": "Hard",
+      "steps": [
+        "Shift to the smallest cog.",
+        "Turn the barrel adjuster to align the pulley with the gear.",
+        "Check limit screws to prevent chain drops."
+      ],
+      "tools_needed": ["Screwdriver", "Hex key"]
+    }
+  }
+}

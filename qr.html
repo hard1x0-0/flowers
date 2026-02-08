@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Day - Open on Phone</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%);
+            font-family: 'Quicksand', Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+        }
+        h1 {
+            color: #ff2d75;
+            margin-top: 0;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(255, 45, 117, 0.3);
+        }
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 10px 0;
+        }
+        .qr-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        .qr-box img {
+            width: 250px;
+            height: 250px;
+        }
+        .button {
+            display: inline-block;
+            background: #ff2d75;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #e01a5f;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 45, 117, 0.4);
+        }
+        .link-text {
+            word-break: break-all;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #ffb3d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌹 Rose Day</h1>
+        <p>Scan QR code or tap the link below to open on your phone</p>
+        
+        <div class="qr-box">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http%3A//192.168.1.6%3A8000/flowers2.html" alt="QR Code">
+        </div>
+        
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.5);">Or copy and open this link on your phone:</p>
+        <div class="link-text">http://192.168.1.6:8000/flowers2.html</div>
+        
+        <a href="http://192.168.1.6:8000/flowers2.html" class="button">Open Now</a>
+        
+        <p style="font-size: 12px; color: rgba(255, 255, 255, 0.4); margin-top: 20px;">
+            ⚠️ Phone must be on the same WiFi network (192.168.1.x)
+        </p>
+    </div>
+</body>
+</html>
